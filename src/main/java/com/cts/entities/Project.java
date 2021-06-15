@@ -1,13 +1,15 @@
 package com.cts.entities;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,9 +28,11 @@ import lombok.ToString;
 @Builder
 
 @Entity
-public class Department {
+@Table(name = "PROJECT")
+public class Project {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "EMP_ID")
 	private Long id;
 
 	@NonNull
@@ -37,10 +41,6 @@ public class Department {
 	@EqualsAndHashCode.Exclude
 	@ToString.Exclude
 	@Default
-	@OneToMany(mappedBy = "department")
+	@ManyToMany(mappedBy = "projects")
 	private List<Employee> employees = new ArrayList<>();
-
 }
-
-// 1, "IT"
-// 2. "Accounts"

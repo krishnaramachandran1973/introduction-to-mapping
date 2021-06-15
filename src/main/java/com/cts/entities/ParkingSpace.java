@@ -1,17 +1,14 @@
 package com.cts.entities;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Builder.Default;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -26,21 +23,21 @@ import lombok.ToString;
 @Builder
 
 @Entity
-public class Department {
+@Table(name = "PARKING_SPACE")
+public class ParkingSpace {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 	@NonNull
-	private String name;
+	private String slot; // 1C
+
+	@NonNull
+	private String location; // C-BLOCK
 
 	@EqualsAndHashCode.Exclude
 	@ToString.Exclude
-	@Default
-	@OneToMany(mappedBy = "department")
-	private List<Employee> employees = new ArrayList<>();
+	@OneToOne(mappedBy = "parkingSpace")
+	private Employee employee;
 
 }
-
-// 1, "IT"
-// 2. "Accounts"
